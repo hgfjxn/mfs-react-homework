@@ -1,11 +1,13 @@
 var http = require("http");
-var i = 0;
+var i = -1;
 http.createServer(function(request, response) {
+  var url = request.url;
+  console.log(url);
+  if(url === "/"){
+  	i = i+1;
+  }
   response.writeHead(201,{"Content-Type":"text/plain"});
-  console.log(i);
-  i = i+1;
-  console.log(i);
-  response.write(i.toString()+"\n");
   response.end(i.toString());
+  
 }).listen(8080);
 console.log("visit server @ http://localhost:8080");
