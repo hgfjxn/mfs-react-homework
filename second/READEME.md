@@ -19,6 +19,7 @@ http.createServer(function(request, response) {
 console.log("visit server @ http://localhost:8080");
 ```
 
+
 但是此版本的输出是有问题的！chrome浏览器每次会加2，safari每次会加1。
 
 > 为什么每次都会调用两次函数呢？
