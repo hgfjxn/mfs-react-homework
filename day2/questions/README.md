@@ -316,6 +316,8 @@ obj2.fun()         // ?
 3 //先给obj2创建了一个fun属性，这个属性的值是一个函数，this知道的是对象的obj2的属性a的值。
 ```
 
+> function 函数的作用域受调用的最后一个子节点决定，如果调用如 `a.b.c.fun()`,那么 `fun()`的作用域为c内。
+
 
 16. 下面代码输出的是什么？为什么？
 
@@ -411,7 +413,20 @@ foo.call({id: 1})()
 
 19. 对于function声明的函数，如果想实现箭头函数的this静态绑定，需要怎么做？
 
-//TODO
+由于function函数的作用域受调用改函数的对象决定，所以想实现箭头函数的this绑定，function内部肯定不能直接调用this，而是将父对象的this参数化，传递给function。例如：
+
+```javascript
+function foo() {
+  var _this = this;
+
+  setTimeout(function () {
+    console.log('id:', _this.id);
+  }, 100);
+}
+```
+
+中 setTimeout中的function函数，为了保证this绑定为父对象的this，可将父对象的this参数化传给function函数。
+
 
 20. 什么是柯里化(currying)，它有什么作用？
 
