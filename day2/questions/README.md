@@ -64,12 +64,13 @@
     本代码中，函数声明会被提升到函数作用域的头部，然后再打印。最终执行的等效代码：
     
     ```javascript
-    function main(){ 
+    function main(){
+	 var foo
      function foo(){ 
        console.log("我来自 foo")
      }
      console.log(foo)      // ?
-     var foo = 10
+     foo = 10
      console.log(foo)      // ?
      console.log(foo)      // ?
     }
@@ -118,7 +119,8 @@
     等效代码如下：
     
     ```javascript
-    var a = 10;
+    var a
+	a = 10;
     function main(){
      var a;
      console.log(a);        // ?
@@ -167,23 +169,37 @@
     </html>
     ```
     
-    因为此处变量 `i`是 `var`声明的，为全局有效。加载此html后，直接运行 `for`循环，跳出循环时， `i=5`；循环内部给button绑定的click事件打印的 `i`是全局的，所以输出一直是 `5`。由代码可知，此代码的运行环境应该是支持ES5的浏览器环境，所以将for循环中，button事件绑定为立即执行函数即可。
+    因为此处变量 `i`是 `var`声明的，为全局有效。加载此html后，直接运行 `for`循环，跳出循环时， `i=5`；循环内部给button绑定的click事件打印的 `i`是全局的，所以输出一直是 `5`。
+	其等效代码如下：
+	
+	```javascript
+	var buttons
+	buttons = $("button")
+	var i
+	for(i=0;i<buttons.length;i++){
+	 buttons[i].onclick = function(){
+	  console.log(i)
+	 }
+	}
+	```
+	
+	由题目代码可知，此代码的运行环境应该是支持ES5的浏览器环境，所以将for循环中，button事件绑定为立即执行函数即可。
     
     `<script>`改成如下内容即可：
     
     ```javascript
-    var buttons = $("button")
-    for(var i=0;i<buttons.length;i++){
-     buttons[i].onclick = (function(){
-       console.log(i)
-     })()
+	var buttons = $("button")
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = (function (i) {
+            return function(){console.log(i)}
+        })(i)
     }
     ```
     
 
 7. 什么是解构？数组解构是什么？
 
-    使用一定的模式，从对象和数组中提取值，并赋值给变量，这被称为解构，例如 `let [a,b,c] = [1,2,3]`将数组`[1,2,3]`的元素，一次赋值给 `a,b,c`。解构支持部分解构，不完全解构的顺序是从左往右。
+    使用一定的模式，从对象和数组中提取值，并赋值给变量，这被称为解构，例如 `let [a,b,c] = [1,2,3]`将数组`[1,2,3]`的元素，通过一种模式，一次分别赋值给 `a,b,c`。解构支持部分解构，其中数组不完全解构的顺序是从左往右，对象解构主要依据对象的属性名。
     
     数据结构是将数组中的每个元素从左到右迭代的赋值给对应变量数组的每个元素，可以支持部分解构。不支持迭代（即数据解构具有`Iterator`接口）的对象和数据结构，不能解构。
 
@@ -225,7 +241,7 @@
     
     声明了1个变量 `c`，值是 `1`。
     
-    因为
+    因为对象解构依据的是对象的属性名。题目中代码
     
     ```javascript
     let { a: { b: { c }}} = { a: { b: { c: "1",d: "2"}}}
@@ -309,9 +325,9 @@
     输出的是：
     
     ```javascript
-    1 //object内部的函数
-    2 //全局作用域的函数，this指的是`windows.id` 
-    3 //先给obj2创建了一个fun属性，这个属性的值是一个函数，this知道的是对象的obj2的属性a的值。
+    1 //object内部的函数，this指向obj作用域，obj.a=1
+    2 //全局作用域的函数，this指的是全局作用域，全局作用域a=2
+    3 //先给obj2创建了一个fun属性，这个属性的值是一个函数，this知道指向obj2的作用域，且obj2.a=3
     ```
     
     > function 函数的作用域受调用的最后一个子节点决定，如果调用如 `a.b.c.fun()`,那么 `fun()`的作用域为c内。
@@ -346,10 +362,10 @@
     ```
     
     理由:箭头函数中 `this` 是静态绑定，`this`指向不变，均值得是定义生效时所在的对象。
-    定义生效时,`this`绑定箭头函数和fun以key value的形式存在，处于obj对象内，this的作用域继承自obj所在的作用域中的this，即全局对象。
+    定义生效时,this指向的是obj所在的作用域。`this`绑定箭头函数中的this实际上是不存在的，如果箭头函数定义在对象中，那么继承自对象所在的作用域中的this；箭头函数定义在函数中，那么this的作用域就是上层函数中。
     
-    > this静态绑定就是：this继承自父执行上下文。
-    > 个人理解，**this指向的固化，并不是箭头函数内部存在绑定this的机制，应该是箭头函数根本没有自己的this，导致内部的this就是外层代码块的this。正因为它没有this，所以也不能作为构造函数。**
+    > this静态绑定就是：this继承自父执行上下文指向声明是的作用域。
+    > **this指向的固化，并不是箭头函数内部存在绑定this的机制，应该是箭头函数根本没有自己的this，导致内部的this就是外层代码块的this。正因为它没有this，所以也不能作为构造函数。**
 
 
 17. 箭头函数的this静态绑定是什么含义？和this的动态绑定有什么区别？请写出示例代码说明区别
@@ -406,7 +422,7 @@
     1
     ```
     
-    解this静态绑定的绑定规则：this继承自父执行上下文。
+    解this静态绑定的绑定规则：this指向声明时的作用域，本程序中，this指向的是foo的作用域。
     
 
 19. 对于function声明的函数，如果想实现箭头函数的this静态绑定，需要怎么做？
@@ -455,5 +471,25 @@
     
     如果箭头函数后面不添加大括号，那么表达式部分只能有一行代码。
     
+
+22. 以下递归函数在调用 `factorial(50000)` 时会报错吗？如果会，应该如何修改此函数（改造后的函数还需为递归函数），使其满足尾递归性质而不会栈溢出。
+
+```javascript
+function factorial(n) {
+    if (n === 1) return 1;
+    return n * factorial(n - 1);
+}
+```
+
+会报错， 报`RangeError: Maximum call stack size exceeded`，递归超出调用栈的大小。
+
+应该使用尾递归和函数的默认参数的方式，改造后代码如下：
+
+```javascript
+function factorial(n,total=1) {
+    if (n === 1) return total;
+    return factorial(n-1, n*total);
+}
+```
 
 
