@@ -106,7 +106,6 @@
 	y==z       //false
 	```
 	
-
 12. 什么是 Generator 函数？和普通函数有什么区别？怎么声明 Generator 函数？
 
 	 Generator 函数是一个生成器函数，一个状态机，封装了多个内部状态。执行Generator函数会返回遍历器对象，可以一次遍历Generator函数的每一个内部状态。
@@ -163,7 +162,6 @@
 	 - 区别：
 	   1. `yield`是关键字，后面跟的是表达式或者值，并在next调用时返回它； `yield*`是表达式，后面跟的是迭代器对象，并在next调用时返回迭代器对象的元素。
 	   2. `yield`用作Generator内外部函数的数据交换，`yield*`在一个Generator函数调用另一个Generator函数；
-	 
 	
 17. 怎么迭代出 Generator 函数所有值？请使用 **for of 循环**实现
 
@@ -173,7 +171,6 @@
 		console.log(x);
 	}
 	```
-	
 	
 18. 为什么要使用 Generator 函数 或者 async/await 进行异步控制流，对比 callback 和 Promise 方案，主要解决了什么问题？
 	
@@ -217,7 +214,6 @@
 		
 		next()
 	}
-
 	```
 
 21. 使用 Promise 可以配合 Generator 函数实现异步控制流吗？具体原理是什么？
@@ -243,7 +239,6 @@
 	4. 返回值是Promise，方便操作。
 	
 	> `async`函数可以看作多个异步操作，包装成的一个 Promise 对象，而`await`命令就是内部`then`命令的语法糖。
-
 
 24. 在全局域或者普通函数中能使用 await 或 yield 关键字吗？为什么？
 
