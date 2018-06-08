@@ -61,7 +61,7 @@
 	1. 所有主线程上的程序顺序是`setTimeout` -> `new Promise(...)` ->`console.log(5)`，但是`setTimeout`函数的回调函数是主线程执行完成后,有空闲时间才会调用;
 	2. 执行`new Promise(...)`，会立即执行回调函数，所以先打印2，，并进入循环，循环到满足i==9999条件后，会执行resolve，promise进入fulfilled状态，打印3后返回，异步等待回调`then`；主线程执行`console.log(5)`打印5；此时还有任务then的回调方法没有执行，所以先执行then的回调函数，打印4；然后立即执行执行`setTimeout`的回调函数，打印1；。
 
-> 参考[javascript运行机制：再谈Eventloop](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)分析 `setTimeout`的运行时机。
+    > 参考[javascript运行机制：再谈Eventloop](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)分析 `setTimeout`的运行时机。
 
 7. 什么是 Promise 对象？引入 Promise 对象是为了解决什么？
 
