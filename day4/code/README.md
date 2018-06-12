@@ -1,6 +1,6 @@
-## 问答题
+## 代码题
 
-代码题代码：
+代码题代码：[见我的github](https://github.com/hgfjxn/mfs-react-homework)
 
 1. 请写出与下面 ES5 代码等价的 ES6 代码
 
