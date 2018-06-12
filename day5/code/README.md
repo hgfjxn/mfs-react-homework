@@ -72,7 +72,6 @@
 	const rootElement = document.getElementById("root");
 	ReactDOM.render(<App />, rootElement);
 	```
-	
 
 3. 请实现如下效果，注意第一行的计数器在父组件中，两个`Button`为两个 Component. ![component-parent-child](./component-partent-child.gif)
 
@@ -110,3 +109,44 @@
 	const rootElement = document.getElementById("root");
 	ReactDOM.render(<Sum />, rootElement);
 	```
+
+	此处可以将button提取出来，成为一个function component。更新后代码如下：
+	
+	```javascript
+	import React from "react";
+	import ReactDOM from "react-dom";
+
+	function Button(props) {
+		return (<button onClick={props.handle}>{props.value}</button>)
+	}
+
+	class Sum extends React.Component {
+		state = {
+			left: 0,
+			right: 0
+		}
+
+		handleLeft = (e) => {
+			this.setState((pre, props) => ({ left: pre.left + 1 }))
+		}
+
+		handleRight = (e) => {
+			this.setState((pre, props) => ({ right: pre.right + 1 }))
+		}
+
+		render() {
+			return (
+				<div>
+					<div>{this.state.left + this.state.right}</div>
+					<Button handle={this.handleLeft} value={this.state.left}/>
+					<Button handle={this.handleRight} value={this.state.right}/>
+				</div>
+			);
+		}
+	}
+
+	const rootElement = document.getElementById("root");
+	ReactDOM.render(<Sum />, rootElement);
+	```
+
+
