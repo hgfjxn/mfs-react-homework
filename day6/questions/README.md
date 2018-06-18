@@ -2,20 +2,20 @@
 
 1. React 有哪些生命周期函数？他们的调用顺序是怎么样的？
 
-    	React 的生命周期函数有：
+    React 的生命周期函数有：
+    
+    - `getDefaultProps()`
+    - `getInitialState()`
+    - `componentWillMount()`
+    - `componentDidMount()`
+    - `componentWillUnmount()`
+    - `componentDidUnmount()`
+    - `componentWillReceiveProps()`
+    - `shouldcomponentupdate()`
+    - `componentWillUpdate()`
+    - `componentDidUpdate()`
     	
-    	- `getDefaultProps()`
-    	- `getInitialState()`
-    	- `componentWillMount()`
-    	- `componentDidMount()`
-    	- `componentWillUnmount()`
-    	- `componentDidUnmount()`
-    	- `componentWillReceiveProps()`
-    	- `shouldcomponentupdate()`
-    	- `componentWillUpdate()`
-    	- `componentDidUpdate()`
-    	
-    	调用顺序和关系入下图：
+    调用顺序和关系入下图：
     
     ```
          ┌───────────────────┐                                   
@@ -142,7 +142,6 @@
 5. 如何实现组件联动？请给出 Demo
 
     基于状态提升，可以实现组件联动，代码同第三题，[demo codeSandbox地址](https://codesandbox.io/s/zro11y25ll)。第一个div展示的数据和表单控件联动。
-    
 
 6. 实践中父子组件嵌套会很深，状态提升数据逐级传递麻烦而且易出错，怎么办？
 
