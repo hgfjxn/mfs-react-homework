@@ -1,0 +1,32 @@
+Arguments: 
+  /usr/local/Cellar/node/9.11.1/bin/node /Users/guangfuhe/.yarn/bin/yarn.js react-scripts
+
+PATH: 
+  /Users/guangfuhe/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/TeX/texbin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.11.1
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find a package.json file in "/Users/guangfuhe/Project/train/mfs-react-homework/day6/code"
+      at new MessageError (/Users/guangfuhe/.yarn/lib/cli.js:186:110)
+      at /Users/guangfuhe/.yarn/lib/cli.js:40048:15
+      at Generator.next (<anonymous>)
+      at step (/Users/guangfuhe/.yarn/lib/cli.js:98:30)
+      at /Users/guangfuhe/.yarn/lib/cli.js:109:13
+      at <anonymous>
