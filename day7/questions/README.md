@@ -98,74 +98,13 @@
 
 4. 如果一个组件是 Function Component，如何快速改造使其可以通过 Consumer 获取数据？
 
-	通过将Function Component的的事件响应放在context中，并且在父组件中使用`Context.Provider`的`value`属性提供相关的属性值和事件响应；
-	在Function Component中使用`Context.Consumer`，获取context中提供的数据和操作方法。然后绑定到component上面。
-	
-	codesandbox地址如下：[codeSandbox](https://codesandbox.io/s/484mkz9490 "codeSandbox")
-	
-	例如，源function component如下：
-	
+	可以通过提供高阶组件封装原Function Component，实现快速改造。例如：
 	```javascript
-	import React from  "react"
-
-	function Button(props){
-		return(
-			<div>
-				<button onClick={props.handleClick}>{props.value}</button>
-			</div>
-		)
-	}
-
-	export default class Test extends React.Component{
-		state={
-			val:0
-		}
-
-		handleClick = e =>{
-			this.setState(prev=>{return {val: prev.val+1}})
-		}
-		render(){
-			return(
-			<div>
-				<Button handleClick={this.handleClick} value={this.state.val}/>
-			</div>
-			)
-		}
-	}
-	```
-	
-	改造成Context API如下：
-	
-	```javascript
-	import React, { createContext } from "react"
-
-	const Context = createContext();
-	function Button(props) {
-		return (
-			<Context.Consumer>{
-				data => {
-				return <button onClick={data.click}>{data.val}</button>
-				}
-			}
+	const bindData = (Component)=>{
+		return ()=>(
+			<Context.Consumer>
+			{Component}
 			</Context.Consumer>)
-		}
-
-	export default class Test extends React.Component {
-	  state = {
-		val: 0,
-		click: e => {
-			this.setState(prev => { return { val: prev.val + 1 } })
-			}
-		}
-		render() {
-			return (
-				<Context.Provider value={this.state}>
-					<div>
-						<Button handleClick={this.handleClick} value={this.state.val} />
-					</div>
-				</Context.Provider>
-			)
-		}
 	}
 	```
 
