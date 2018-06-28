@@ -10,6 +10,7 @@
     * **选做**实现 Todo 内容持久化（即浏览器刷新后，TodoList 状态不丢失）
 	
 	**github地址：**[TODO React Redux demo](./day7-code-2 "todo react redux demo")
+	
 	说明：
 	1. 设计react-redux的核心流程如下：
 	   1. 设计ActionType、Actions或ActionCreator；
