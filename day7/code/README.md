@@ -23,8 +23,8 @@
 	3. **这次做的不好的地方，应该UI组件和容器分离。**
 	
 	> 注意点：
-	1. export 组件的时候，什么时候需要`import {name} from ***`， 什么时候使用`import name from ****`:使用 `export default` 使用后者，仅使用 `export`，使用前者import
-	2. reducer应该保证state是幂等操作，不带副作用，所以可以使用`...`操作和特定的。
+	> 1. export 组件的时候，什么时候需要`import {name} from ***`， 什么时候使用`import name from ****`:使用 `export default` 使用后者，仅使用 `export`，使用前者import
+	> 2. reducer应该保证state是幂等操作，不带副作用，所以可以使用`...`操作和特定的。
 	
 3. 请将上课时演示的[代码](https://codesandbox.io/s/81rrpq9vn8)中的 `bindData(Component)` 函数改造为 `bindData(mapStateToProps)(Component)`，`mapStateToProps` 参数的含义与 `connect` 中的一致
    
