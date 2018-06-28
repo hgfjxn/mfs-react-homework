@@ -1,0 +1,5 @@
+const ENTRY_KEY=13
+const ESCAPE_KEY=27
+
+
+export {ENTRY_KEY, ESCAPE_KEY};
